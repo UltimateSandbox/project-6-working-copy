@@ -13,8 +13,6 @@ import java.util.stream.Collectors;
 @Service
 public class DictionaryService {
 
-    private static final String INVALID_REFERENCE = "Invalid Reference";
-
     public Entry getWord(String word) throws WordNotFoundException {
 
         String definition = DictionaryReference.getDictionary()
