@@ -30,4 +30,15 @@ public class AggregatorService {
 
         return common;
     }
+
+    public List<Entry> getWordsThatStartWithAndContain(String startsWith, String contains) {
+
+        List<Entry> wordsThatStartWith = restClient.getWordsStartingWith(startsWith);
+        List<Entry> wordsThatContain = restClient.getWordsThatContain(contains);
+
+        List<Entry> common = new ArrayList<>(wordsThatStartWith);
+        common.retainAll(wordsThatContain);
+
+        return common;
+    }
 }
