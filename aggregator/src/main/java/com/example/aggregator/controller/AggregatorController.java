@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class AggregatorController {
 
@@ -22,5 +24,10 @@ public class AggregatorController {
     @GetMapping("/getDefinitionFor/{word}")
     public Entry getDefinitionFor(@PathVariable String word) {
         return service.getDefinitionFor(word);
+    }
+
+    @GetMapping("/getWordsThatContainSuccessiveLettersAndStartsWith/{chars}")
+    public List<Entry> getWordsThatContainSuccessiveLettersAndStartsWith(@PathVariable String chars) {
+        return service.getWordsThatContainSuccessiveLettersAndStartsWith(chars);
     }
 }

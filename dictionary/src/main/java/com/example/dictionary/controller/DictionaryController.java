@@ -90,4 +90,27 @@ public class DictionaryController {
 
         return entries;
     }
+
+    @GetMapping("/getWordsThatContainConsecutiveLetters")
+    public List<Entry> getWordsThatContainConsecutiveLetters() {
+
+        StopWatch sw = new StopWatch();
+        sw.start();
+        List<Entry> entries = this.dictionaryService.getWordsThatContainConsecutiveDoubleLetters();
+        sw.stop();
+
+        long nanoSeconds = sw.getLastTaskTimeNanos();
+
+        String message = new StringBuilder().append("Retrieved entries for words containing")
+                                            .append(" consecutive double letters,")
+                                            .append(" containing ")
+                                            .append(entries.size())
+                                            .append(" entries in ")
+                                            .append(nanoSeconds / 1000000.0)
+                                            .append("ms")
+                                            .toString();
+        logger.info(message);
+
+        return entries;
+    }
 }
