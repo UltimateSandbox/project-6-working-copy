@@ -29,6 +29,16 @@ public class DictionaryController {
         Entry entry = this.dictionaryService.getWord(word);
         sw.stop();
 
+        long nanoSeconds = sw.getLastTaskTimeNanos();
+        String message = new StringBuilder().append("Retrieved entry for [")
+                .append(word)
+                .append("] in ")
+                .append(nanoSeconds / 1000000.0)
+                .append("ms")
+                .toString();
+
+        logger.info(message);
+
         return entry;
     }
 }
