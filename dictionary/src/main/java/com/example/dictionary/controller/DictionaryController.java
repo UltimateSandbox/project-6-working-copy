@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class DictionaryController {
 
@@ -40,5 +42,74 @@ public class DictionaryController {
         logger.info(message);
 
         return entry;
+    }
+
+    @GetMapping("/getWordsStartingWith/{value}")
+    public List<Entry> getWordsStartingWith(@PathVariable String value) {
+
+        StopWatch sw = new StopWatch();
+        sw.start();
+        List<Entry> entries = this.dictionaryService.getWordsStartingWith(value);
+        sw.stop();
+
+        long nanoSeconds = sw.getLastTaskTimeNanos();
+        String message = new StringBuilder().append("Retrieved entries for words starting with [")
+                .append(value)
+                .append("] containing ")
+                .append(entries.size())
+                .append(" entries in ")
+                .append(nanoSeconds / 1000000.0)
+                .append("ms")
+                .toString();
+
+        logger.info(message);
+
+        return entries;
+    }
+
+    @GetMapping("/getWordsThatContain/{value}")
+    public List<Entry> getWordsThatContain(@PathVariable String value) {
+
+        StopWatch sw = new StopWatch();
+        sw.start();
+        List<Entry> entries = this.dictionaryService.getWordsThatContain(value);
+        sw.stop();
+
+        long nanoSeconds = sw.getLastTaskTimeNanos();
+        String message = new StringBuilder().append("Retrieved entries for words that contain [")
+                .append(value)
+                .append("] containing ")
+                .append(entries.size())
+                .append(" entries in ")
+                .append(nanoSeconds / 1000000.0)
+                .append("ms")
+                .toString();
+
+        logger.info(message);
+
+        return entries;
+    }
+
+    @GetMapping("/getWordsThatContainConsecutiveLetter")
+    public List<Entry> getWordsThatContainConsecutiveLetter() {
+
+        StopWatch sw = new StopWatch();
+        sw.start();
+        List<Entry> entries = this.dictionaryService.getWordsThatContainConsecutiveDoubleLetters();
+        sw.stop();
+
+        long nanoSeconds = sw.getLastTaskTimeNanos();
+        String message = new StringBuilder().append("Retrieved entries for words that containing ")
+                .append(" consecutive double letters, ")
+                .append(" containing ")
+                .append(entries.size())
+                .append(" entries in ")
+                .append(nanoSeconds / 1000000.0)
+                .append("ms")
+                .toString();
+
+        logger.info(message);
+
+        return entries;
     }
 }
