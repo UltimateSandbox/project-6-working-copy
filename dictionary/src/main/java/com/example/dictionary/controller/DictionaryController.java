@@ -100,8 +100,8 @@ public class DictionaryController {
 
         long nanoSeconds = sw.getLastTaskTimeNanos();
         String message = new StringBuilder().append("Retrieved entries for words that containing ")
-                .append(" consecutive double letters, ")
-                .append(" containing ")
+                .append("consecutive double letters, ")
+                .append("containing ")
                 .append(entries.size())
                 .append(" entries in ")
                 .append(nanoSeconds / 1000000.0)
