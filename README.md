@@ -2,9 +2,7 @@
 This is an example of a microservice application. 
 
 ## Aggregator Application
-The aggrgator application used for this microservice acts as a front-end for our application. This
-
-It also aggregates and runs various algorithms to return the appropriate data.
+The aggrgator application used for this microservice acts as a front-end for our application. It also aggregates and runs various algorithms to return the appropriate data.
 
 The aggregator app has examples of:
 - REST services
