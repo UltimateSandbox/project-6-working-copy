@@ -1,0 +1,8 @@
+type Query {
+    entryByWord(word: String): Entry
+}
+
+type Entry {
+    word: String!
+    definition: String
+}
