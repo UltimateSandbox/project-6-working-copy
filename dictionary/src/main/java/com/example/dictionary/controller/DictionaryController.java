@@ -89,7 +89,7 @@ public class DictionaryController {
 
         StopWatch sw = new StopWatch();
         sw.start();
-        List<Entry> entries = this.dictionaryService.getWordsThatContainConsecutiveDoubleLetters(value);
+        List<Entry> entries = this.dictionaryService.getWordsThatContainConsecutiveDoubleLetters();
         sw.stop();
 
         long nanoSeconds = sw.getLastTaskTimeNanos();
