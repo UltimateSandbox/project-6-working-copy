@@ -5,6 +5,11 @@ import com.example.dictionary.model.Entry;
 import com.example.dictionary.reference.DictionaryReference;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 @Service
 public class DictionaryService {
 
@@ -19,6 +24,51 @@ public class DictionaryService {
 
         return entry;
 
+    }
+
+    public List<Entry> getWordsStartingWith(String value) {
+
+        return DictionaryReference.getDictionary()
+                .entrySet()
+                .stream()
+                .filter(entry -> entry.getKey().startsWith(value))
+                .sorted(Map.Entry.comparingByKey(Comparator.naturalOrder()))
+                .map(entry -> new Entry(entry.getKey(), entry.getValue()))
+                .collect(Collectors.toList());
+    }
+
+    public List<Entry> getWordsThatContain(String value) {
+
+        return DictionaryReference.getDictionary()
+                .entrySet()
+                .stream()
+                .filter(entry -> entry.getKey().contains(value))
+                .sorted(Map.Entry.comparingByKey(Comparator.naturalOrder()))
+                .map(entry -> new Entry(entry.getKey(), entry.getValue()))
+                .collect(Collectors.toList());
+    }
+
+    public List<Entry> getWordsThatContainConsecutiveDoubleLetters(String value) {
+
+        return DictionaryReference.getDictionary()
+                .entrySet()
+                .stream()
+                .filter(entry -> {
+
+                    String word = entry.getKey();
+                    boolean duplicateConsecutiveLetters = false;
+                    for(int x = 1; x < word.length(); x++) {
+                        if(word.charAt(x) == word.charAt(x - 1)) {
+                            duplicateConsecutiveLetters = true;
+                            break;
+                        }
+                    }
+                    return duplicateConsecutiveLetters;
+
+                })
+                .sorted(Map.Entry.comparingByKey(Comparator.naturalOrder()))
+                .map(entry -> new Entry(entry.getKey(), entry.getValue()))
+                .collect(Collectors.toList());
     }
 
 }
