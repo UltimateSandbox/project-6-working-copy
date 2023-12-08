@@ -30,4 +30,17 @@ public class AggregatorService {
 
         return common;
     }
+
+    public List<Entry> getWordsThatContainSuccessiveLettersAndContains(String chars) {
+
+        List<Entry> wordsThatContain = restClient.getWordsThatContain(chars);
+        List<Entry> wordsThatContainSuccessiveLetters = restClient.getWordsThatContainConsecutiveLetters();
+
+        List<Entry> common = new ArrayList<>(wordsThatContain);
+        common.retainAll(wordsThatContainSuccessiveLetters);
+
+        return common;
+
+
+    }
 }

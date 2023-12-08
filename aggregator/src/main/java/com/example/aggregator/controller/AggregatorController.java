@@ -57,4 +57,25 @@ public class AggregatorController {
 
         return entries;
     }
+
+    @GetMapping("/getWordsThatContainSuccessiveLettersAndContains/{chars}")
+    public List<Entry> getWordsThatContainSuccessiveLettersAndContains(@PathVariable String chars) {
+
+        StopWatch sw = new StopWatch();
+
+        sw.start();
+        List<Entry> entries = service.getWordsThatContainSuccessiveLettersAndContains(chars);
+        sw.stop();
+
+        long nanoSeconds = sw.getLastTaskTimeNanos();
+        String message = new StringBuilder("Retrieved entry for words containing successive letters and contains [")
+                .append(chars)
+                .append("] in ")
+                .append(nanoSeconds / 1000000.0)
+                .append("ms")
+                .toString();
+        logger.info(message);
+
+        return entries;
+    }
 }
