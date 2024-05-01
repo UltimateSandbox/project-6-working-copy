@@ -35,7 +35,8 @@ public class DictionaryService {
         return DictionaryReference.getDictionary()
                 .entrySet()
                 .stream()
-                .filter(entry -> entry.getKey().contains(value))
+                .filter(entry -> entry.getKey()
+                        .startsWith(value))
                 .sorted(Map.Entry.comparingByKey(Comparator.naturalOrder()))
                 .map(entry -> new Entry(entry.getKey(), entry.getValue()))
                 .collect(Collectors.toList());
